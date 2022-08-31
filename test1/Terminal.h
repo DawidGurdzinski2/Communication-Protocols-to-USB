@@ -4,14 +4,17 @@
 #include <string.h>
 #include <termios.h>
 #include <unistd.h>
+#include <stdlib.h>
 
 class Terminal{
 
+char* port;
+int speed;
 
 public:
-int set_terminal_attributs(int fd, int speed, int parity);
-void set_blocking (int fd, int should_block);
-
-Terminal();
+int fd;
+int configPort(int,int);
+int openPort(char*);
+Terminal(char* ,int);
 ~Terminal();
 };
