@@ -15,6 +15,7 @@ public:
 int fd;
 int configPort(int,int);
 int openPort(char*);
+void readData();
 Terminal(char* ,int);
 ~Terminal();
 };

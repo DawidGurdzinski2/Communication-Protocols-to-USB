@@ -13,33 +13,42 @@
 int main()
 {
     char *portname = "/dev/ttyACM0";
- 
+    int i=0;
     
-   
+
+
+    int written;
 	Terminal w(portname,B115200);
 	w.fd=w.openPort(portname);
 	w.configPort(w.fd,B115200);
 
 
-    do {
-        unsigned char buf[80];
-        int rdlen;
-
-        rdlen = read(w.fd, buf, sizeof(buf) - 1);
-        if (rdlen > 0) {
-
-            unsigned char   *p;
-  
-            for (p = buf; rdlen-- > 0; p++)
-                {printf(" %x", *p);}
-            printf("\n");
-
-        } else if (rdlen < 0) {
-            printf("Error from read: %d: %s\n", rdlen, strerror(errno));
-        } else {  
-            printf("Timeout from read\n");
-        }     
+    while(1){
+        if(i==0){
+            char message[] = "e";
+            int messageSize = strlen(message);
+            written = write(w.fd, message, messageSize);
+            printf("\nTotal bytes written: %d\n", written);
+            sleep(2);
+            w.readData();
+        }
+      
+        
+        i++;
+        //printf("%d\n",i);
+       
+        if(i==10){
+            char message[] = "g";
+            int messageSize = strlen(message);
+            written = write(w.fd, message, messageSize);
+            printf("\nTotal bytes written: %d\n", written);
+            sleep(2);
             
-
-    } while (1);
+        }
+        if(i>=10){
+            w.readData();
+            sleep(1);
+        }
+    }
+   
 }

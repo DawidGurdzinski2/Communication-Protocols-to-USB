@@ -43,6 +43,26 @@ Terminal::Terminal(char* p ,int s){
 	speed=s;
 
 }
+void Terminal::readData(){
+	unsigned char buf[80];
+    int rdlen;
+
+    rdlen = read(fd, buf, sizeof(buf) - 1);
+    if (rdlen > 0) {
+
+       unsigned char   *p;
+  
+        for (p = buf; rdlen-- > 0; p++)
+            {printf(" %x", *p);}
+        printf("\n");
+
+    } else if (rdlen < 0) {
+            printf("Error from read: %d: %s\n", rdlen, strerror(errno));
+    } else {  
+            printf("Timeout from read\n");
+    }     
+
+}
 
 Terminal::~Terminal(){
 	close(fd);
