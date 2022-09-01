@@ -45,6 +45,6 @@ Terminal::Terminal(char* p ,int s){
 }
 
 Terminal::~Terminal(){
-
+	close(fd);
 	
 }

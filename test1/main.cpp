@@ -12,7 +12,7 @@
 
 int main()
 {
-    char *portname = "/dev/ttyACM1";
+    char *portname = "/dev/ttyACM0";
  
     
    
@@ -31,8 +31,7 @@ int main()
             unsigned char   *p;
   
             for (p = buf; rdlen-- > 0; p++)
-                {printf(" %x", *p);
-                printf("%d",rdlen);}
+                {printf(" %x", *p);}
             printf("\n");
 
         } else if (rdlen < 0) {
