@@ -1,32 +1,25 @@
-import serial
-import time
+from tkinter import *
+from tkinter import messagebox
+from OscilogramFrame import *
+
+window = Tk() 
+windowHeight=1000
+windowWidth=1200
+
+window.geometry(str(windowWidth)+"x"+str(windowHeight))
+window.title("Bro Code first GUI program")
+window.config(background="#2bf33f")
+frame=OscilogramFrame(window)
 
 
-ser = serial.Serial('/dev/ttyACM0',115200)  # open serial port
-print(ser.name)  
 
-#x=ser.read()
-#print(x)
-#s=ser.read(10)
-#print(s)
-i=0
-while(1):
-    if(i==0):
-        ser.write(b'e') 
-        line=ser.readline()
-        
-        line=ser.readline()
-        line=ser.readline()
-        print(line)
-    if(i==10):
-        ser.write(b'g')
-    if(i>=10):
-        line=ser.readline()
-        print(line)
-    if(i==20):
-        ser.write(b'e') 
-    if(i==21):
-        ser.write(b'e')     
-    i=i+1
-    print(i)
-ser.close()   
+
+
+
+
+
+def on_closing():
+    if messagebox.askokcancel("Quit", "Do you want to quit?"):
+        window.destroy()
+window.protocol("WM_DELETE_WINDOW", on_closing)
+window.mainloop() 
