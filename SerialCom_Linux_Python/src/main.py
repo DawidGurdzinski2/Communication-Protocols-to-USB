@@ -2,6 +2,8 @@ from tkinter import *
 from tkinter import messagebox
 from OscilogramFrame import *
 
+
+
 window = Tk() 
 windowHeight=1000
 windowWidth=1200
@@ -10,7 +12,7 @@ window.geometry(str(windowWidth)+"x"+str(windowHeight))
 window.title("Bro Code first GUI program")
 window.config(background="#2bf33f")
 frame=OscilogramFrame(window)
-
+frame.updateDataArray()
 
 
 
