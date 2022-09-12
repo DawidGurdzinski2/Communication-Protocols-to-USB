@@ -1,7 +1,7 @@
 from tkinter import *
 from tkinter import messagebox
 from OscilogramFrame import *
-
+import time
 
 
 window = Tk() 
@@ -12,7 +12,11 @@ window.geometry(str(windowWidth)+"x"+str(windowHeight))
 window.title("Bro Code first GUI program")
 window.config(background="#2bf33f")
 frame=OscilogramFrame(window)
-frame.updateDataArray()
+frame.initOscilograms()
+while(True):
+    frame.updateData()
+    window.update()
+    time.sleep(0.01)
 
 
 

@@ -14,5 +14,6 @@ class Oscilogram:
         self.wave=WaveForm(canvas,WIDTH,HEIGHT,dataformat)
         canvas.grid(row=ROW,column=COLUMN)
 
-    def writeDataToArray(self,data):
+    def UpdateDataToArray(self,data):
         self.wave.writeDataToArray(data)
+        self.wave.printData()

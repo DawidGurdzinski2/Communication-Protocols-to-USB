@@ -1,6 +1,6 @@
 from Oscilogram import *
 from tkinter import *
-from Terminal import *
+from DataModulator import *
 
 class OscilogramFrame:
 
@@ -11,9 +11,13 @@ class OscilogramFrame:
         self.oscilogram1 =Oscilogram(self.frame,500,400,0,0,0)
         self.oscilogram2 =Oscilogram(self.frame,500,400,1,0,0)
         self.frame.grid(row=0,column=0)
-        self.terminal=Terminal()
+        
+    def initOscilograms(self):
+        self.datamod1=DataModulator(400,200)
+        self.Amplitude1=self.datamod1.getMaxAmplitudeCOS()
+        self.datamod2=DataModulator(400,200)
+        self.Amplitude2=2*self.datamod2.getMaxAmplitudeCOS()
 
-    def updateDataArray(self):
-        data=self.terminal.writeDataToArray(4)
-        self.oscilogram1.writeDataToArray(data[0])
-        self.oscilogram2.writeDataToArray(data[1])
+    def updateData(self):
+        self.oscilogram1.UpdateDataToArray(-self.datamod1.writeData(self.Amplitude1))
+        self.oscilogram2.UpdateDataToArray(-self.datamod2.writeData(self.Amplitude2))

@@ -8,8 +8,6 @@ class WaveForm:
         self.width=width
         self.height=height
         self.dataformat=dataformat
-        canvas.create_line(0,0,200,200,fill="red",width=5)
-        #dataarray= [[0 for i in range(3)] for j in range(6)]    #[[0,0,0],[0,0,0]....] 
         self.dataarray= [0 for i in range(width)]
         self.dataarray= deque(self.dataarray)
         
@@ -18,6 +16,14 @@ class WaveForm:
         self.dataarray.rotate(-1)
         self.dataarray[self.width-1]=data
         print(self.dataarray)
+        
+    def printData(self):
+        for i in range(len(self.dataarray)-1):
+            self.canvas.create_line(i,self.dataarray[i]+(self.height/2),i+1,self.dataarray[i+1]+(self.height/2),fill="red",width=1)
+        self.canvas.create_line(0,2+(self.height/2),1,3+(self.height/2),fill="red",width=1)
+        self.canvas.create_line(1,3+(self.height/2),2,-50+(self.height/2),fill="red",width=1)
+    
+
 
 
 
