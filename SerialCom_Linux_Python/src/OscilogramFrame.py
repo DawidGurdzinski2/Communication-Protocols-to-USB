@@ -13,9 +13,9 @@ class OscilogramFrame:
         self.frame.grid(row=0,column=0)
         
     def initOscilograms(self):
-        self.datamod1=DataModulator(400,200)
+        self.datamod1=DataModulator(400,20)
         self.Amplitude1=self.datamod1.getMaxAmplitudeCOS()
-        self.datamod2=DataModulator(400,200)
+        self.datamod2=DataModulator(400,500)
         self.Amplitude2=2*self.datamod2.getMaxAmplitudeCOS()
 
     def updateData(self):

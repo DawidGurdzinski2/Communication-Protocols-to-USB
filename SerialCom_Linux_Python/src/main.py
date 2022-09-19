@@ -1,7 +1,6 @@
 from tkinter import *
 from tkinter import messagebox
 from OscilogramFrame import *
-import time
 
 
 window = Tk() 
