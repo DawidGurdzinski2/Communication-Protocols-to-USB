@@ -7,7 +7,7 @@ class Button:
         image = tk.PhotoImage(file=image)
         tk.Grid.rowconfigure(frame, row, weight=1)
         tk.Grid.columnconfigure(frame, column, weight=1)
-    
+          
         self.button = tk.Button(
             frame,
             text=text,
@@ -23,19 +23,18 @@ class Button:
  
     def clickOsciloscop(self):
        # self.changeButtonState()
-        flag=0 
-        if flag!=1:
-            flag=1
-            Osciloscope=tk.Toplevel()
-            Osciloscope.title("Osciloscope")
-            print(Osciloscope.state())
-            def on_closing():
-                if messagebox.askokcancel("Quit", "Do you want to quit?"):
-                    Osciloscope.destroy()
-                    flag=0
-            #self.but['state'] = "disabled"  
-            #self.but.config(state="disabled")      
-            Osciloscope.protocol("WM_DELETE_WINDOW", on_closing)
+        
+            
+        self.Osciloscope=tk.Toplevel()
+        self.Osciloscope.title("Osciloscope")
+        print(Osciloscope.state())
+        def on_closing():
+            if messagebox.askokcancel("Quit", "Do you want to quit?"):
+                self.Osciloscope.destroy()
+                flag=0
+        #self.but['state'] = "disabled"  
+        #self.but.config(state="disabled")      
+        self.Osciloscope.protocol("WM_DELETE_WINDOW", on_closing)
         print("osciloscop")
 
     def clickModulator(self):
@@ -68,3 +67,11 @@ class Button:
 
     def changeButtonState(self):
         self.button.config(state="disabled")
+
+    def checkExist(self,variable):
+        try:
+            variable
+        except NameError:
+            return Flase
+        else:
+            return True
