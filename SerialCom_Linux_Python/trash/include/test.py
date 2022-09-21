@@ -77,3 +77,54 @@ for d in data:
     b = Button(*d)
  
 root.mainloop()
+
+
+
+self.ButtonOsciloscop= tk.Button(self.frame,
+                text=self.name[0], 
+                command=self.func[0],
+                font=("Comic Sans",self.FONT),
+                fg="#00FF00",
+                bg="black",
+                activeforeground="#00FF00",
+                activebackground="black",
+                state="active",
+                image=self.photo[0],
+                compound='bottom')
+        self.ButtonGenerator =tk.Button(self.frame,
+                text=self.name[1],
+                command=self.func[1],
+                font=("Comic Sans",self.FONT),
+                fg="#00FF00",
+                bg="black",
+                activeforeground="#00FF00",
+                activebackground="black",
+                state="active",
+                image=self.photo[1],
+                compound='bottom')
+        self.ButtonModulator = tk.Button(self.frame,
+                text=self.name[2],
+                command=self.func[2],
+                font=("Comic Sans",self.FONT),
+                fg="#00FF00",
+                bg="black",
+                activeforeground="#00FF00",
+                activebackground="black",
+                state="active",
+                image=self.photo[2],
+                compound='bottom')
+        self.ButtonTerminal = tk.Button(self.frame,
+                text=self.name[3],
+                command=self.func[3],
+                font=("Comic Sans",self.FONT),
+                fg="#00FF00",
+                bg="black",
+                activeforeground="#00FF00",
+                activebackground="black",
+                state="active",
+                image=self.photo[3],
+                compound='bottom')
+        self.ButtonOsciloscop.grid(row=0,column=0)
+        self.ButtonGenerator.grid(row=0,column=1)
+        self.ButtonModulator.grid(row=0,column=2)
+        self.ButtonTerminal.grid(row=0,column=3)

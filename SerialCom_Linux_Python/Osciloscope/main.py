@@ -1,11 +1,12 @@
-from tkinter import *
+
 from tkinter import messagebox
+import tkinter as tk
 from ButtonFrame import *
 
-window = Tk() 
+window =tk.Tk() 
 windowHeight=120
 windowWidth=440
-window.resizable(False,False)
+#window.resizable(False,False)
 
 window.geometry(str(windowWidth)+"x"+str(windowHeight))
 window.title("Main Window")
