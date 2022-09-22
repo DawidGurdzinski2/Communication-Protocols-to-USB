@@ -79,3 +79,13 @@ canvas.create_oval(190,190,310,310,fill="white",width=10)
 canvas.pack()
 
 window.mainloop()
+
+
+def read_button_clicked():
+    read_button.config(command=stop_button_clicked)
+    read_button.config(text="Stop")
+    print_data()
+
+def stop_button_clicked():    
+    read_button.config(command=read_button_clicked)
+    read_button.config(text="Read Data")

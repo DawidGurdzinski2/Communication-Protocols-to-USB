@@ -27,4 +27,5 @@ class Button:
         else:
             self.button.config(state="disabled")
 
-    
+    def getButtonState(self):
+        return self.button['state']

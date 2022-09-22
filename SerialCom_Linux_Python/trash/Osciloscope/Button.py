@@ -23,7 +23,7 @@ class Button:
  
     def clickOsciloscop(self):
        # self.changeButtonState()
-        
+        self.flag=1
             
         self.Osciloscope=tk.Toplevel()
         self.Osciloscope.title("Osciloscope")
