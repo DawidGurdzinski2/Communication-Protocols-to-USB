@@ -1,12 +1,10 @@
 import tkinter as tk
-from Oscilogram import *
 
-class Osciloscope:
+class Generator:
 
 
-    def __init__(self,window,height,width,state,quantity):
+    def __init__(self,window,height,width,state):
         self.state=state
-        self.quantity=quantity
         self.window=window
         self.height=height
         self.width=width
@@ -16,17 +14,7 @@ class Osciloscope:
         tk.Grid.rowconfigure(self.window,0,weight=1)
         tk.Grid.columnconfigure(self.window,0,weight=1)
         self.frame.grid(row=0,column=0,sticky="nswe")
-       # self.createOscilogram(0)
-
     
-    #def createOscilogram(self,quantity):
-     #   for i in range(quantity):
-      #      self.Osci[i]=Oscilogram(self.frame, self.width, self.height,i,0 ,0 )
-            
-
-    
-
-
     def UpdateData(self):
         if self.state:
             self.dataout=self.datain+2

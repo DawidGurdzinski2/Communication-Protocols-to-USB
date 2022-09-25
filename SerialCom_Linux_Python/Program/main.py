@@ -3,7 +3,8 @@ from tkinter import messagebox
 import tkinter as tk
 from ButtonFrame import *
 from multiprocessing import Process
-
+import threading
+import time 
 
 window =tk.Tk() 
 windowHeight=120
@@ -22,20 +23,26 @@ window.config(background="white")
 
 
 frame=ButtonFrame(window)
+
+
 def zabawa():
-    count = 0
+    nigga=0
     while True:
-        count += 1
-        frame.kabelekin(count)
-        #print(frame.kabelekout())
-x=Process(target=zabawa)
+        nigga+=1
+        frame.setData(nigga, 0, 0, 0)
+        frame.UpdateData()
+        
+        print(frame.getData())
+        time.sleep(1)
+
+x=threading.Thread(target=zabawa,daemon=True)
 x.start()
 
 
 def on_closing():
     if messagebox.askokcancel("Quit", "Do you want to quit?"):
         window.destroy()
-        x.kill()
+        #x.kill()
 window.protocol("WM_DELETE_WINDOW", on_closing)
 window.mainloop() 
 

@@ -1,22 +1,27 @@
 import tkinter as tk
 from Button import *
 from Osciloscope import *
-from multiprocessing import Process
-import time 
+from Generator import *
+
 class ButtonFrame:
 
 
     def __init__(self,window):
         self.window=window
-        self.data1=0
-        self.data2=0
+        self.initModules()
         self.frame = tk.Frame(self.window,bg="black",bd=5)
         tk.Grid.rowconfigure(self.window,0,weight=1)
         tk.Grid.columnconfigure(self.window,0,weight=1)
         self.createButtons()
         self.frame.grid(row=0,column=0,sticky="nswe")
        
-    
+    def initModules(self):
+        self.teporaryWindow=tk.Toplevel()
+        self.Osc=Osciloscope(self.teporaryWindow,0,0 ,False,0)
+        self.Gen=Generator(self.teporaryWindow,0,0 ,False)
+        #self.Mod=
+        #self.Ter=
+        self.teporaryWindow.destroy()
 
     def createButtons(self):
         data = [[self.frame,"Osciloscope", lambda: self.clickOsciloscop(), 0,0,"blue.png"],
@@ -28,54 +33,44 @@ class ButtonFrame:
 
     def clickOsciloscop(self):
         self.button[0].changeButtonState(False) 
-        self.OSCILOSCOPE=tk.Toplevel()
-        self.OSCILOSCOPE.title("Osciloscope")
-        self.OSCILOSCOPE.geometry(str(400)+"x"+str(400))
-        self.OSCILOSCOPE.config(background="white")
-        self.Osc=Osciloscope(self.OSCILOSCOPE,400,400)
-        
-        def chujdawajdane(self,data):
-            
-            while True:
-                self.Osc.setData(data)
-                print(self.Osc.getData())
-
-
-        self.x = Process(target=self.chujdawajdane,args=3)
-        self.x.start()
-
+        self.OSC=tk.Toplevel()
+        self.OSC.title("Osciloscope")
+        self.OSC.geometry(str(400)+"x"+str(400))
+        self.OSC.config(background="white")
+        self.Osc=Osciloscope(self.OSC,400,400,True,1)
         def on_closing():
             if messagebox.askokcancel("Quit", "Do you want to quit?"):
-                self.OSCILOSCOPE.destroy()
-                self.button[0].changeButtonState(True)   
-                self.x.kill()
-                
-        self.OSCILOSCOPE.protocol("WM_DELETE_WINDOW", on_closing)
+                self.button[0].changeButtonState(True) 
+                self.Osc.resetData()
+                self.OSC.destroy()   
+        self.OSC.protocol("WM_DELETE_WINDOW", on_closing)
         
-        
+    def clickGenerator(self):
+        self.button[1].changeButtonState(False) 
+        self.GEN=tk.Toplevel()
+        self.GEN.title("Generator")
+        self.GEN.geometry(str(400)+"x"+str(400))
+        self.GEN.config(background="white")
+        self.Gen=Generator(self.GEN,400,400,True)
+        def on_closing():
+            if messagebox.askokcancel("Quit", "Do you want to quit?"):
+                self.button[1].changeButtonState(True) 
+                self.Gen.resetData()
+                self.GEN.destroy()   
+        self.GEN.protocol("WM_DELETE_WINDOW", on_closing)         
 
     def clickModulator(self):
         self.button[2].changeButtonState(False) 
         Modulator=tk.Toplevel()
         Modulator.title("Modulator")
-
-        
-        
-
         def on_closing():
             if messagebox.askokcancel("Quit", "Do you want to quit?"):
                 Modulator.destroy()
         Modulator.protocol("WM_DELETE_WINDOW", on_closing)
         print("modulator")
     
-    def clickGenerator(self):
-        Generator=tk.Toplevel()
-        Generator.title("Generator")
-        def on_closing():
-            if messagebox.askokcancel("Quit", "Do you want to quit?"):
-                Generator.destroy()
-        Generator.protocol("WM_DELETE_WINDOW", on_closing)
-        print("generator")
+    
+
     def clickTerminal(self):
         Terminal=tk.Toplevel()
         Terminal.title("Terminal")
@@ -85,29 +80,23 @@ class ButtonFrame:
         Terminal.protocol("WM_DELETE_WINDOW", on_closing)
         print("terminal") 
     
-    def funkcjacostam(self):
-        if(self.button[0].getButtonState()=='disabled' and self.button[2].getButtonState()=='disabled'  ):
-            self.OSCILOSCOPE.printnigga()
+    def getData(self):
+        return [self.Osc.dataout,self.Gen.dataout]
 
+    def UpdateData(self):
+        self.Osc.UpdateData()
+        self.Gen.UpdateData()
+        #self.Mod.UpdateData()
+        #self.Ter.UpdateData()
 
-        #try:
-          #  variable
-        #except NameError:
-         #   return Flase
-        #else:
-         #   return True
+    def setData(self,data1,data2,data3,data4):
+        self.Osc.datain=data1
+        self.Gen.datain=data2
+        #self.Mod.datain=data3
+        #self.Ter.datain=data4
+
+       
     
-    def timer(self):
-        print()
-        count = 0
-        while True:
-            time.sleep(1)
-            count += 1
-            print("logged in for: ", count, "seconds")   
     
-    def kabelekin(self,data):
-        self.data1=data
         
-        
-    def kabelekout(self):
-        return self.data2
+    
