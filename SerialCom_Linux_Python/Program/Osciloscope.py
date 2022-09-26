@@ -18,17 +18,20 @@ class Osciloscope:
         tk.Grid.columnconfigure(self.window,0,weight=1)
         self.frame.grid(row=0,column=0,sticky="nswe")
         self.createOscilogram(2)
+        self.division=[2,1]
 
-    
     def createOscilogram(self,quantity):
         self.Osci=[(Oscilogram(self.frame, self.width, self.height,i,0 ,0 ))for i in range(quantity)]
         
 
 
-    def UpdateData(self):
+    def UpdateData(self,buttonsStates):
         if self.state:
             for i in range(len(self.Osci)):
+                self.Osci[i].buttonsStates=buttonsStates
+                self.Osci[i].division=self.division[i]
                 self.Osci[i].UpdateDataToArray(self.datain[i])
+                
 
     def resetData(self):
         self.datain=[[0,0],[0,0]]

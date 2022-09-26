@@ -86,7 +86,7 @@ class ButtonFrame:
         return [self.Osc.dataout,self.Gen.dataout]
 
     def UpdateData(self):
-        self.Osc.UpdateData()
+        self.Osc.UpdateData(self.buttonsStates())
         self.Gen.UpdateData()
         #self.Mod.UpdateData()
         #self.Ter.UpdateData()
@@ -97,7 +97,8 @@ class ButtonFrame:
         #self.Mod.datain=data3
         #self.Ter.datain=data4
 
-       
+    def buttonsStates(self):
+        return [self.button[i].getButtonState() for i in range(len(self.button))]
     
     
         

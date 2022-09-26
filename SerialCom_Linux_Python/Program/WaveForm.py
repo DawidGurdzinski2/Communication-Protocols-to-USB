@@ -1,6 +1,8 @@
 from tkinter import *
 from collections import deque
 import time
+import math
+import numpy as np
 
 class WaveForm:
 
@@ -8,17 +10,41 @@ class WaveForm:
     def __init__(self,canvas,width,height,dataformat):
         self.canvas=canvas
         self.width=width
+        self.signaliput=True
         self.height=height
         self.dataformat=dataformat
         self.dataarray= [0 for i in range(width)]
         self.dataarray= deque(self.dataarray)
-        
-        
-        
+        self.oldtime=0
+        self.one=0
+        self.division=100
+
+# 100 pikseli =100ms
+# div =2  -> 100pikseli = 50ms
+
     def writeDataToArray(self,data):
-        self.dataarray.rotate(-1)
-        self.dataarray[self.width-1]=data
-        
+        if(self.signaliput[1]):
+            self.dataarray.rotate(-1)
+            self.dataarray[self.width-1]=data[0]
+        elif (self.one==0):
+            self.dataarray.rotate(-1)
+            self.dataarray[self.width-1]=data[0]
+            self.one+=1
+        else:
+            self.g=(self.oldtime+data[1])*self.division
+            if(self.g>=1):
+                
+                if(math.floor(self.g)<2):
+                    x=[data[0]]
+                else:
+                    x=np.linspace(self.dataarray[self.width-1],data[0],math.floor(self.g))
+            
+                for i in x:    
+                    self.dataarray.rotate(-1)
+                    self.dataarray[self.width-1]=i
+            self.g=self.g-math.floor(self.g)
+            self.oldtime=self.g
+
         
     def printData(self):
         try:

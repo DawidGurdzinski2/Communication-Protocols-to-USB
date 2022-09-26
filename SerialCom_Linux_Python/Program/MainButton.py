@@ -19,7 +19,7 @@ class MainButton:
         self.flag=0
         self.button.grid(row=row,column=column ,sticky="nswe")
         self.button.image = image
-        #self.button['state']="disabled"
+        
  
     def changeButtonState(self,state):
         if state:
@@ -28,4 +28,4 @@ class MainButton:
             self.button.config(state="disabled")
 
     def getButtonState(self):
-        return self.button['state']
+        return self.button['state']=="normal"
