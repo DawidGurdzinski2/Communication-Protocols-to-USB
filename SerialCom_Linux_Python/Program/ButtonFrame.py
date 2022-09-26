@@ -1,5 +1,5 @@
 import tkinter as tk
-from Button import *
+from MainButton import *
 from Osciloscope import *
 from Generator import *
 
@@ -28,7 +28,7 @@ class ButtonFrame:
                     [self.frame,"Generator", lambda: self.clickGenerator() ,0,1,"blue.png"],
                     [self.frame,"Modulator", lambda: self.clickModulator(), 0,2,"blue.png"],
                     [self.frame,"Terminal", lambda: self.clickTerminal(), 0,3,"blue.png"],]
-        self.button=[Button(*data[i])for i in range(len(data))]
+        self.button=[MainButton(*data[i])for i in range(len(data))]
 
 
     def clickOsciloscop(self):

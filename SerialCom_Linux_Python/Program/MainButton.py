@@ -1,7 +1,7 @@
 import tkinter as tk
 
 from tkinter import messagebox
-class Button:
+class MainButton:
     
     def __init__(self,frame, text, func,row,column, image=""):
         image = tk.PhotoImage(file=image)

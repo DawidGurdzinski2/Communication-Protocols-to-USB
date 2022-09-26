@@ -29,11 +29,12 @@ def zabawa():
     nigga=0
     while True:
         nigga+=1
-        frame.setData(nigga, 0, 0, 0)
+        niggas=[nigga,0]
+        frame.setData(niggas, 0, 0, 0)
         frame.UpdateData()
         
         print(frame.getData())
-        time.sleep(1)
+        
 
 x=threading.Thread(target=zabawa,daemon=True)
 x.start()
@@ -42,7 +43,7 @@ x.start()
 def on_closing():
     if messagebox.askokcancel("Quit", "Do you want to quit?"):
         window.destroy()
-        #x.kill()
+        
 window.protocol("WM_DELETE_WINDOW", on_closing)
 window.mainloop() 
 
