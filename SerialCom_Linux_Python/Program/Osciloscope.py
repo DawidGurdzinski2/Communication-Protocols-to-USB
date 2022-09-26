@@ -11,8 +11,8 @@ class Osciloscope:
         self.window=window
         self.height=height
         self.width=width
-        self.datain=[0,88]
-        self.dataout=0
+        self.datain=[[0,0],[0,0]]
+        self.dataout=[0]
         self.frame=tk.Frame(self.window,bg="pink",bd=5)
         tk.Grid.rowconfigure(self.window,0,weight=1)
         tk.Grid.columnconfigure(self.window,0,weight=1)
@@ -31,7 +31,7 @@ class Osciloscope:
                 self.Osci[i].UpdateDataToArray(self.datain[i])
 
     def resetData(self):
-        self.datain=0
+        self.datain=[[0,0],[0,0]]
         self.dataout=0
         self.state=False
     

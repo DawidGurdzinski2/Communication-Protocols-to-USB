@@ -18,13 +18,16 @@ class WaveForm:
     def writeDataToArray(self,data):
         self.dataarray.rotate(-1)
         self.dataarray[self.width-1]=data
-        print(self.dataarray)
+        
         
     def printData(self):
-        self.canvas.delete("all")
-        for i in range(len(self.dataarray)-1):
+        try:
+            self.canvas.delete("all")
+            for i in range(len(self.dataarray)-1):
             
-            self.canvas.create_line(i,self.dataarray[i]+(self.height/2),i+1,self.dataarray[i+1]+(self.height/2),fill="red")
+                self.canvas.create_line(i,self.dataarray[i]+(self.height/2),i+1,self.dataarray[i+1]+(self.height/2),fill="red")
+        except:
+            pass   
             
        
 

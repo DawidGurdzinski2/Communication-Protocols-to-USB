@@ -59,6 +59,8 @@ class ButtonFrame:
                 self.GEN.destroy()   
         self.GEN.protocol("WM_DELETE_WINDOW", on_closing)         
 
+
+
     def clickModulator(self):
         self.button[2].changeButtonState(False) 
         Modulator=tk.Toplevel()

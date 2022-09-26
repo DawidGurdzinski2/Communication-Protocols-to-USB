@@ -14,7 +14,7 @@ windowWidth=440
 
 
 
-data=0
+
 window.geometry(str(windowWidth)+"x"+str(windowHeight))
 window.title("Main Window")
 window.config(background="white")
@@ -28,12 +28,12 @@ frame=ButtonFrame(window)
 def zabawa():
     nigga=0
     while True:
-        nigga+=1
-        niggas=[nigga,0]
-        frame.setData(niggas, 0, 0, 0)
         frame.UpdateData()
+        data=frame.getData()
         
-        print(frame.getData())
+        frame.setData(data[1], 0, 0, 0)
+        
+        
         
 
 x=threading.Thread(target=zabawa,daemon=True)
