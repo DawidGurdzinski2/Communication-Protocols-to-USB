@@ -11,17 +11,16 @@ class Osciloscope:
         self.window=window
         self.height=height
         self.width=width
-        self.datain=[[0,0],[0,0]]
+        self.datain=[[[0,0],[0,0]],[[0,0],[0,0]]]
         self.dataout=[0]
         self.frame=tk.Frame(self.window,bg="pink",bd=5)
         tk.Grid.rowconfigure(self.window,0,weight=1)
         tk.Grid.columnconfigure(self.window,0,weight=1)
         self.frame.grid(row=0,column=0,sticky="nswe")
         self.createOscilogram(2)
-        self.division=[2,1]
 
     def createOscilogram(self,quantity):
-        self.Osci=[(Oscilogram(self.frame, self.width, self.height,i,0 ,0 ))for i in range(quantity)]
+        self.Osci=[(Oscilogram(self.frame, self.width, self.height,i,0 ))for i in range(quantity)]
         
 
 
@@ -29,7 +28,6 @@ class Osciloscope:
         if self.state:
             for i in range(len(self.Osci)):
                 self.Osci[i].buttonsStates=buttonsStates
-                self.Osci[i].division=self.division[i]
                 self.Osci[i].UpdateDataToArray(self.datain[i])
                 
 

@@ -7,12 +7,11 @@ import numpy as np
 class WaveForm:
 
 
-    def __init__(self,canvas,width,height,dataformat):
+    def __init__(self,canvas,width,height):
         self.canvas=canvas
         self.width=width
         self.signaliput=True
         self.height=height
-        self.dataformat=dataformat
         self.dataarray= [0 for i in range(width)]
         self.dataarray= deque(self.dataarray)
         self.oldtime=0
@@ -23,7 +22,7 @@ class WaveForm:
 # div =2  -> 100pikseli = 50ms
 
     def writeDataToArray(self,data):
-        if(self.signaliput[1]):
+        if(self.signaliput):
             self.dataarray.rotate(-1)
             self.dataarray[self.width-1]=data[0]
         elif (self.one==0):

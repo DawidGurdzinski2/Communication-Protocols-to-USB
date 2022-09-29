@@ -25,6 +25,19 @@ window.config(background="white")
 frame=ButtonFrame(window)
 
 
+# Data
+# Osciloscope input =  [[y,t,S,T],[y,t,S,T],...]-SIGNAL AND SOURCE INFO [T,T,T,T]-BUTTON STATE  [O]
+#  setting input source to every  Waveform  S=0 Generator  S=1 Modulator  S=2 Terminal  T-output of source
+#    
+# Terminal input =   O   how many outputs
+# Terminal Output =   [[y,t,2,T ],[y,t,2,T ],.... ]
+#  
+# Generator input =  0 how many outputs
+# Generator Output =   [[y,t,0,T ],[y,t,0,T],.... ]
+#
+# Modulator input =  [[y,t,S,T],[y,t,S,T],...]
+# Modulator Output =   [[y,t,1,T ],[y,t,1,T],.... ]
+
 def zabawa():
     nigga=0
     while True:

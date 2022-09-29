@@ -82,6 +82,7 @@ class ButtonFrame:
         Terminal.protocol("WM_DELETE_WINDOW", on_closing)
         print("terminal") 
     
+    
     def getData(self):
         return [self.Osc.dataout,self.Gen.dataout]
 

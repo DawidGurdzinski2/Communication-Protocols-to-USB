@@ -7,6 +7,7 @@ class Signal:
     def __init__(self):
         self.counter=0
         self.oldcounter=0
+        self.signaltypes=("cosinus","sinus")
 
     def generateSignal(self,Period,signalType):
         self.Period=Period
