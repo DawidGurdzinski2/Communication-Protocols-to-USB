@@ -16,7 +16,7 @@ class WaveForm:
         self.dataarray= deque(self.dataarray)
         self.oldtime=0
         self.one=0
-        self.division=100
+        self.division=1
 
 # 100 pikseli =100ms
 # div =2  -> 100pikseli = 50ms
@@ -29,7 +29,7 @@ class WaveForm:
             self.dataarray.rotate(-1)
             self.dataarray[self.width-1]=data[0]
             self.one+=1
-        else:
+        elif data[1]>0:
             self.g=(self.oldtime+data[1])*self.division
             if(self.g>=1):
                 

@@ -18,7 +18,7 @@ class ButtonFrame:
     def initModules(self):
         self.teporaryWindow=tk.Toplevel()
         self.Osc=Osciloscope(self.teporaryWindow,0,0 ,False,0)
-        self.Gen=Generator(self.teporaryWindow,0,0 ,False)
+        self.Gen=Generator(self.teporaryWindow,False)
         #self.Mod=
         #self.Ter=
         self.teporaryWindow.destroy()
@@ -35,7 +35,7 @@ class ButtonFrame:
         self.button[0].changeButtonState(False) 
         self.OSC=tk.Toplevel()
         self.OSC.title("Osciloscope")
-        self.OSC.geometry(str(400)+"x"+str(400))
+        self.OSC.geometry(str(600)+"x"+str(1200))
         self.OSC.config(background="white")
         self.Osc=Osciloscope(self.OSC,400,400,True,1)
         def on_closing():
@@ -49,9 +49,9 @@ class ButtonFrame:
         self.button[1].changeButtonState(False) 
         self.GEN=tk.Toplevel()
         self.GEN.title("Generator")
-        self.GEN.geometry(str(400)+"x"+str(400))
+        self.GEN.geometry(str(700)+"x"+str(700))
         self.GEN.config(background="white")
-        self.Gen=Generator(self.GEN,400,400,True)
+        self.Gen=Generator(self.GEN,True)
         def on_closing():
             if messagebox.askokcancel("Quit", "Do you want to quit?"):
                 self.button[1].changeButtonState(True) 

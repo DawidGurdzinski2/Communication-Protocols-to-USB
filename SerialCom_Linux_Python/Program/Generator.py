@@ -5,7 +5,7 @@ from SignalSource import *
 class Generator:
 
 
-    def __init__(self,window,height,width,state):
+    def __init__(self,window,state):
         self.state=state
         self.datain=[0]
         self.dataout=[[0,0,0,0],[0,0,0,0]]
@@ -16,8 +16,8 @@ class Generator:
         tk.Grid.columnconfigure(self.window,0,weight=1)
         self.frame.grid(row=0,column=0,sticky="nswe")
 
-        self.numberOfSources=2
-        self.createSourceSignal(2)
+        self.numberOfSources=4
+        self.createSourceSignal(self.numberOfSources)
 
         
 
@@ -30,10 +30,13 @@ class Generator:
             self.sendSignal()
 
     def sendSignal(self):
-        for i in range(self.numberOfSources):
-            data=self.signalSources[i].sendSignal()
-            self.dataout[i]=[data[0],data[1],0,i]
-
+        try:
+            for i in range(self.numberOfSources):
+                data=self.signalSources[i].sendSignal()
+                self.dataout[i]=[data[0],data[1],0,i]
+                #print(self.dataout)
+        except:
+            pass
 
     def resetData(self):
         self.datain=0
