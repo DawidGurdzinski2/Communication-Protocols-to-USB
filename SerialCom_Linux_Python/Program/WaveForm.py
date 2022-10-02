@@ -50,7 +50,7 @@ class WaveForm:
             self.canvas.delete("all")
             for i in range(len(self.dataarray)-1):
             
-                self.canvas.create_line(i,self.dataarray[i]+(self.height/2),i+1,self.dataarray[i+1]+(self.height/2),fill="red")
+                self.canvas.create_line(i,self.dataarray[i]+(self.height/2)+2,i+1,self.dataarray[i+1]+(self.height/2)+2,fill="red")
         except:
             pass   
             
