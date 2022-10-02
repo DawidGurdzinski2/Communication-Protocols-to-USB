@@ -11,7 +11,7 @@ class Oscilogram:
         self.row=row
         self.column=column
         self.buttonsStates=[True,True,True,True]
-        canvas = Canvas(frame,width=width,height=height)
+        canvas = Canvas(frame,width=width,height=height+2)
         self.wave=WaveForm(canvas,width,height)
         canvas.grid(row=row,column=column)
         self.previousdData=0

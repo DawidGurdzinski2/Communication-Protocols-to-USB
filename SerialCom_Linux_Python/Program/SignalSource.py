@@ -10,6 +10,8 @@ class SignalSource:
         tk.Grid.rowconfigure(frame,0,weight=1)
         tk.Grid.columnconfigure(frame,0,weight=1)
         self.frame.grid(row=row,column=column,sticky="nswe")
+        self.genNumber=tk.Label(self.frame,text="Output"+str(row))
+        self.genNumber.grid(row=0,column=0)
         self.signal=Signal()
         self.createListoOfSignals()
         self.createButtons()
@@ -21,6 +23,7 @@ class SignalSource:
         self.Duty=0
         ###########
         self.createParameterFrame(self.signalType)
+
         
 
     def createListoOfSignals(self):
@@ -49,17 +52,6 @@ class SignalSource:
             self.buttonStart.config(text="Start")
 
    
-    
-    
-
-    
-               
-
-    
-
-   
-
-    
 
     #FUNCIONT WHICH YOU NEED CHANGE TO ADD NEW SIGNAL 
     def sendSignal(self):
