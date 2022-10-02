@@ -30,26 +30,29 @@ frame=ButtonFrame(window)
 #  setting input source to every  Waveform  S=0 Generator  S=1 Modulator  S=2 Terminal  T-output of source
 #    
 # Terminal input =   O   how many outputs
-# Terminal Output =   [[y,t,2,T ],[y,t,2,T ],.... ]
+# Terminal Output =   [[y,t ],[y,t ],.... ]
 #  
 # Generator input =  0 how many outputs
-# Generator Output =   [[y,t,0,T ],[y,t,0,T],.... ]
+# Generator Output =   [[y,t],[y,t],.... ]
 #
-# Modulator input =  [[y,t,S,T],[y,t,S,T],...]
-# Modulator Output =   [[y,t,1,T ],[y,t,1,T],.... ]
+# Modulator input =  [[y,t],[y,t],...]
+# Modulator Output =   [[y,t ],[y,t],.... ]
 
-def zabawa():
-    nigga=0
+
+#data [Generator,Modulator,Terminal]
+# Generator=[[y1,x1],[y2,x2],....,[yn,xn]]
+# Modulator=[[y1,x1],[y2,x2],....,[yn,xn]]
+# Terminal=[[y1,x1],[y2,x2],....,[yn,xn]]
+def dataStream():
     while True:
         frame.UpdateData()
         data=frame.getData()
-        
-        frame.setData(data[1], 0, 0, 0)
+        frame.setData(data)
         
         
         
 
-x=threading.Thread(target=zabawa,daemon=True)
+x=threading.Thread(target=dataStream,daemon=True)
 x.start()
 
 

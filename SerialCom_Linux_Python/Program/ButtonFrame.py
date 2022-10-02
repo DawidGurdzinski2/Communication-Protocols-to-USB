@@ -84,7 +84,7 @@ class ButtonFrame:
     
     
     def getData(self):
-        return [self.Osc.dataout,self.Gen.dataout]
+        return [self.Gen.dataout,[[0,0],[0,0]],[[0,0],[0,0]]]
 
     def UpdateData(self):
         self.Osc.UpdateData(self.buttonsStates())
@@ -92,11 +92,10 @@ class ButtonFrame:
         #self.Mod.UpdateData()
         #self.Ter.UpdateData()
 
-    def setData(self,data1,data2,data3,data4):
-        self.Osc.datain=data1
-        self.Gen.datain=data2
-        #self.Mod.datain=data3
-        #self.Ter.datain=data4
+    def setData(self,data):
+        self.Osc.datain=data
+        #self.Mod.datain=data2
+        
 
     def buttonsStates(self):
         return [self.button[i].getButtonState() for i in range(len(self.button))]
