@@ -61,6 +61,6 @@ class Generator:
 
     def resetData(self):
         
-        self.dataout=[[0,0]]
+        self.dataout=[[0,0],[0,0]]
         self.state=False
     

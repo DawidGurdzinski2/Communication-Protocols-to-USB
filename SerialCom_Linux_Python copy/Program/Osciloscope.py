@@ -63,27 +63,10 @@ class Osciloscope:
 
     def UpdateData(self,buttonsStates):
         if self.state:
-            self.sourceList=self.createSourceList(self.datain)
             for i in range(len(self.Osci)):
-                self.Osci[i].setSourceList(self.sourceList)
                 self.Osci[i].buttonsStates=buttonsStates
-                self.Osci[i].UpdateDataToArray(self.datain)
-
-
-    #data [Generator,Modulator,Terminal]
-    # Generator=[[y1,x1],[y2,x2],....,[yn,xn]]
-    # Modulator=[[y1,x1],[y2,x2],....,[yn,xn]]
-    # Terminal=[[y1,x1],[y2,x2],....,[yn,xn]]
-    
-    def createSourceList(self,data):
-        List=[]
-        for i in range(len(data[0])-1):
-            List.append("Gen"+str(i+1))
-        for i in range(len(data[1])-1):
-            List.append("Mod"+str(i+1))
-        for i in range(len(data[2])-1):
-            List.append("Ter"+str(i+1))
-        return List
+                self.Osci[i].UpdateDataToArray(self.datain[0][0])
+                
 
     def resetData(self):
         self.datain=[[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]]

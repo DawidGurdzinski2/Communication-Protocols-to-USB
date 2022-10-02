@@ -2,7 +2,7 @@
 from tkinter import messagebox
 import tkinter as tk
 from ButtonFrame import *
-
+from multiprocessing import Process
 import threading
 import time 
 
@@ -47,7 +47,7 @@ def dataStream():
     while True:
         frame.UpdateData()
         data=frame.getData()
-        
+        print(data)
         frame.setData(data)
         
         

@@ -1,5 +1,8 @@
-from tkinter import *
+import tkinter as tk
+from tkinter import ttk
+
 from WaveForm import *
+import threading
 import math 
 class Oscilogram:
 
@@ -11,17 +14,15 @@ class Oscilogram:
         self.row=row
         self.column=column
         self.buttonsStates=[True,True,True,True]
-        canvas = Canvas(frame,width=width,height=height+2)
+        canvas = tk.Canvas(frame,width=width,height=height+2)
         self.wave=WaveForm(canvas,width,height)
         canvas.grid(row=row,column=column)
         self.previousdData=0
         self.division=1
+        self.SourceList=[]
+        self.createListoOfSources(row)
 
-    def UpdateDataToArray(self,data):
-        self.wave.division=self.division
-        self.wave.signaliput=self.buttonsStates[1]
-        self.wave.writeDataToArray([self.adjustData(data[0]),data[1]])
-        self.wave.printData()
+    
     
     def adjustData(self,data):
         if(abs(data)>=abs(self.previousdData)):
@@ -30,5 +31,32 @@ class Oscilogram:
             return 0
         else:
             return math.floor(data*self.height/(2*self.previousdData))
+
+    #edytuj
+    def UpdateDataToArray(self,data):
+        print(self.SourceList)
+        self.updateCombobox()
+        wavedata=data[0][0]
+        self.wave.division=self.division
+        self.wave.signaliput=self.buttonsStates[1]
+        self.wave.writeDataToArray([self.adjustData(wavedata[0]),wavedata[1]])
+        self.wave.printData()
+
     
+    def setSourceList(self,SourceList):
+        self.SourceList=SourceList
+        
+    def updateCombobox(self):
+        self.combo['values']=self.SourceList
+
+
+    def createListoOfSources(self,row):
+        self.mysignal=tk.StringVar()
+        self.combo=ttk.Combobox(self.frame,textvariable=self.mysignal)
+        self.combo['values']=self.SourceList
+        self.combo.grid(column=1,row=row)
+        self.combo['state']='readonly'
+        self.combo.bind("<<ComboboxSelected>>", self.on_select_changed)
     
+    def on_select_changed(self,event):
+        print(self.mysignal.get())
