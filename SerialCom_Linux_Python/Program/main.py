@@ -43,18 +43,16 @@ frame=ButtonFrame(window)
 # Generator=[[y1,x1],[y2,x2],....,[yn,xn]]
 # Modulator=[[y1,x1],[y2,x2],....,[yn,xn]]
 # Terminal=[[y1,x1],[y2,x2],....,[yn,xn]]
-def zabawa():
-    nigga=0
+def dataStream():
     while True:
         frame.UpdateData()
         data=frame.getData()
-        print(data)
         frame.setData(data)
         
         
         
 
-x=threading.Thread(target=zabawa,daemon=True)
+x=threading.Thread(target=dataStream,daemon=True)
 x.start()
 
 
