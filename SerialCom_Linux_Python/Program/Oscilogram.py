@@ -19,6 +19,8 @@ class Oscilogram:
         canvas.grid(row=row,column=column)
         self.previousdData=0
         self.division=1
+        self.firstindex=0
+        self.secondindex=0
         self.SourceList=[]
         self.createListoOfSources(row)
 
@@ -34,22 +36,21 @@ class Oscilogram:
 
     #edytuj
     def UpdateDataToArray(self,data):
-        print(self.SourceList)
         self.updateCombobox()
-        wavedata=data[0][0]
+
+        wavedata=data[self.firstindex][self.secondindex]
         self.wave.division=self.division
         self.wave.signaliput=self.buttonsStates[1]
         self.wave.writeDataToArray([self.adjustData(wavedata[0]),wavedata[1]])
         self.wave.printData()
 
-    
+ 
     def setSourceList(self,SourceList):
         self.SourceList=SourceList
         
     def updateCombobox(self):
         self.combo['values']=self.SourceList
-
-
+ 
     def createListoOfSources(self,row):
         self.mysignal=tk.StringVar()
         self.combo=ttk.Combobox(self.frame,textvariable=self.mysignal)
@@ -59,4 +60,13 @@ class Oscilogram:
         self.combo.bind("<<ComboboxSelected>>", self.on_select_changed)
     
     def on_select_changed(self,event):
-        print(self.mysignal.get())
+        string=self.mysignal.get()
+        if "Gen" in string:
+            self.firstindex=0
+            self.secondindex=int(string[3:])-1
+        elif "Mod" in string:
+            self.firstindex=1
+            self.secondindex=int(string[3:])-1
+        elif "Ter" in string:
+            self.firstindex=2
+            self.secondindex=int(string[3:])-1

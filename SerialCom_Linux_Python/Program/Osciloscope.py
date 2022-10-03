@@ -70,10 +70,7 @@ class Osciloscope:
                 self.Osci[i].UpdateDataToArray(self.datain)
 
 
-    #data [Generator,Modulator,Terminal]
-    # Generator=[[y1,x1],[y2,x2],....,[yn,xn]]
-    # Modulator=[[y1,x1],[y2,x2],....,[yn,xn]]
-    # Terminal=[[y1,x1],[y2,x2],....,[yn,xn]]
+    
     
     def createSourceList(self,data):
         List=[]
