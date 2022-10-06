@@ -44,7 +44,7 @@ class WaveForm:
             self.g=self.g-math.floor(self.g)
             self.oldtime=self.g
 
-        
+
     def printData(self):
         try:
             self.canvas.delete("all")

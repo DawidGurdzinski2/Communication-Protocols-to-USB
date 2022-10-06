@@ -20,7 +20,7 @@ class Osciloscope:
 
         self.numberOfOscilograms=0
         self.createOscilogram(self.numberOfOscilograms)
-        self.createButton()
+        self.createButtons()
 
 
     def createScrollBar(self):
@@ -41,25 +41,22 @@ class Osciloscope:
     def UpdateDataScrollbar(self):
         self.canvas.update_idletasks()
         self.canvas.config(scrollregion=self.canvas.bbox("all"))
-        #self.canvas.update()
-        #tk.Grid.rowconfigure(self.window,0,weight=1)
-        #tk.Grid.columnconfigure(self.window,0,weight=1)
-        #self.canvas.create_window((0,0),window=self.frame ,anchor="nw")
+        
 
     def createOscilogram(self,quantity):
         self.Osci=[(Oscilogram(self.frame, self.width, self.height,i+1,0 ))for i in range(quantity)]
     
-    def createButton(self):
+    def createButtons(self):
         self.addbutton=tk.Button(self.frame,text="AddOscilogram",state="normal",command=self.addOscilogram)
-        self.addbutton.grid(row=0)
+        self.addbutton.grid(row=0,column=0)
+        
 
     def addOscilogram(self):
-        self.Osci.append(Oscilogram(self.frame, self.width, self.height, self.numberOfOscilograms+1, 0))
+        self.Osci.append(Oscilogram(self.frame, self.width, self.height, self.numberOfOscilograms+1))
         self.numberOfOscilograms+=1    
         self.UpdateDataScrollbar()
-    #add function to adding more oscilograms
-    #add posibility to choosing inputs
 
+    
 
     def UpdateData(self,buttonsStates):
         if self.state:
