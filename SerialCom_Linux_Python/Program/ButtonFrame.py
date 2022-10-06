@@ -74,6 +74,7 @@ class ButtonFrame:
     
 
     def clickTerminal(self):
+        self.button[3].changeButtonState(False) 
         Terminal=tk.Toplevel()
         Terminal.title("Terminal")
         def on_closing():

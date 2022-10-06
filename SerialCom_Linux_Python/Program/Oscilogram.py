@@ -25,22 +25,25 @@ class Oscilogram:
         self.createListoOfSources(row)
 
     
-    
+    #do wyjebania 
     def adjustData(self,data):
         if(abs(data)>=abs(self.previousdData)):
             self.previousdData=abs(data)
         if(self.previousdData==0):
             return 0
         else:
-            return math.floor(data*self.height/(2*self.previousdData))
+            return math.floor(data*self.height/2)
 
-    #edytuj
+    
+
+
+
     def UpdateDataToArray(self,data):
         self.updateCombobox()
 
         wavedata=data[self.firstindex][self.secondindex]
         self.wave.division=self.division
-        self.wave.signaliput=self.buttonsStates[1]
+        self.wave.signaliput=(self.buttonsStates[1] and self.buttonsStates[2] and self.buttonsStates[3])
         self.wave.writeDataToArray([self.adjustData(wavedata[0]),wavedata[1]])
         self.wave.printData()
 
