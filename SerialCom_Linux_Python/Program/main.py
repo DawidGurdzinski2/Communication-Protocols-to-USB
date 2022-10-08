@@ -43,11 +43,18 @@ frame=ButtonFrame(window)
 # Generator=[[y1,x1],[y2,x2],....,[yn,xn]]
 # Modulator=[[y1,x1],[y2,x2],....,[yn,xn]]
 # Terminal=[[y1,x1],[y2,x2],....,[yn,xn]]
+
+    # convert a time expressed in seconds since epoch to a readable string
+#                                        epoch = when your computer thinks time began (reference point)
+
+
+
+
 def dataStream():
     while True:
+        
         frame.UpdateData()
         data=frame.getData()
-        
         frame.setData(data)
         
         

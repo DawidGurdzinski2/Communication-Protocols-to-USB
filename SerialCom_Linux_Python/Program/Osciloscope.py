@@ -1,8 +1,9 @@
 import tkinter as tk
 from Oscilogram import *
 from tkinter import ttk
-#from WaveForm import *
-#from Button import *
+import threading
+
+
 class Osciloscope:
 
 
@@ -10,7 +11,7 @@ class Osciloscope:
         self.state=state
         self.quantity=quantity
         self.window=window
-        
+        self.time2=0
         self.height=height
         self.width=width
         self.datain=[[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]]
@@ -24,17 +25,17 @@ class Osciloscope:
 
 
     def createScrollBar(self):
-        self.scrollframe=tk.Frame(self.window,bg="pink",bd=5)
+        self.scrollframe=tk.Frame(self.window,bg="black",bd=5)
         tk.Grid.rowconfigure(self.window,0,weight=1)
         tk.Grid.columnconfigure(self.window,0,weight=1)
         self.scrollframe.grid(row=0,column=0,sticky="nswe")
-        self.canvas=tk.Canvas(self.scrollframe)
+        self.canvas=tk.Canvas(self.scrollframe,bg="grey")
         self.canvas.pack(side="left",fill="both",expand=1)
         self.scrollbar=ttk.Scrollbar(self.scrollframe,orient="vertical",command=self.canvas.yview)
         self.scrollbar.pack(side="right",fill="y")
         self.canvas.configure(yscrollcommand=self.scrollbar.set)
         self.canvas.bind('<Configure>',lambda e:self.canvas.configure(scrollregion=self.canvas.bbox("all")))
-        self.frame=tk.Frame(self.canvas,bg="pink",bd=5)
+        self.frame=tk.Frame(self.canvas,bg="grey",bd=5)
         self.canvas.create_window((0,0),window=self.frame ,anchor="nw")
 
 
@@ -44,30 +45,79 @@ class Osciloscope:
         
 
     def createOscilogram(self,quantity):
-        self.Osci=[(Oscilogram(self.frame, self.width, self.height,i+1,0 ))for i in range(quantity)]
-    
+        self.Osci=[(Oscilogram(self.frame, self.width, self.height,2*i+1,0 ))for i in range(quantity)]
+        self.Labels=[tk.Label(self.grame,text="Osciloscope"+str(i+1))for i in range(quantity)]
+
     def createButtons(self):
         self.addbutton=tk.Button(self.frame,text="AddOscilogram",state="normal",command=self.addOscilogram)
+        
         self.addbutton.grid(row=0,column=0)
         
 
     def addOscilogram(self):
-        self.Osci.append(Oscilogram(self.frame, self.width, self.height, self.numberOfOscilograms+1))
+        self.Osci.append(Oscilogram(self.frame, self.width, self.height, 2*self.numberOfOscilograms+2))
         self.numberOfOscilograms+=1    
+        self.Labels.append(tk.Label(self.frame,text="Osciloscope"+str(self.numberOfOscilograms),bg="grey",font=('Arial',15,'bold')))
+        self.Labels[self.numberOfOscilograms-1].grid(row=1+(self.numberOfOscilograms-1)*2)
         self.UpdateDataScrollbar()
 
-    
+###############
+    def createThreads(self):
+        self.threads=[threading.Thread(target=self.writeData, args=(i,)) for i in range(len(self.Osci))]
+
+    def startThreads(self):
+        for i in range(len(self.Osci)):
+            self.threads[i].start()
+            
+
+
+    def writeData(self,i):
+        
+        time1=time.time()
+        self.Osci[i].setNumberOfOscilograms(self.numberOfOscilograms)
+        self.Osci[i].setSourceList(self.sourceList)
+        self.Osci[i].buttonsStates=self.buttonsStates
+        self.Osci[i].UpdateDataToArray(self.datain)
+        print("oneOSctime: "+str(time.time()-time1))
 
     def UpdateData(self,buttonsStates):
+        self.buttonsStates=buttonsStates
+        self.sourceList=self.createSourceList(self.datain)
         if self.state:
-            self.sourceList=self.createSourceList(self.datain)
+            time3=time.time()
+            self.createThreads()
+            self.startThreads()
             for i in range(len(self.Osci)):
-                self.Osci[i].setSourceList(self.sourceList)
-                self.Osci[i].buttonsStates=buttonsStates
-                self.Osci[i].UpdateDataToArray(self.datain)
-
-
+                self.threads[i].join()
+            print("AllOsc: "+str(time.time()-time3))
     
+
+
+
+
+
+
+
+    def costam(self,i):
+        time1=time.time()
+        #self.createThreads()
+        
+        print("threadCRE: "+str(time.time()-time1))
+        self.sourceList=self.createSourceList(self.datain)
+        #for i in range(len(self.Osci)):
+        time3=time.time()
+        self.Osci[i].setSourceList(self.sourceList)
+        self.Osci[i].buttonsStates=self.buttonsStates
+        self.Osci[i].UpdateDataToArray(self.datain)
+        print("oneOscitime: "+str(time.time()-time3))
+            
+        print("allOsciTime: "+str(time.time()-time1))
+        time.sleep(3)
+
+
+
+##############
+
     
     def createSourceList(self,data):
         List=[]
@@ -83,3 +133,5 @@ class Osciloscope:
         self.datain=[[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]]
         self.state=False
     
+
+

@@ -35,9 +35,9 @@ class ButtonFrame:
         self.button[0].changeButtonState(False) 
         self.OSC=tk.Toplevel()
         self.OSC.title("Osciloscope")
-        self.OSC.geometry(str(600)+"x"+str(1200))
+        self.OSC.geometry(str(1150)+"x"+str(875))
         self.OSC.config(background="white")
-        self.Osc=Osciloscope(self.OSC,400,400,True,1)
+        self.Osc=Osciloscope(self.OSC,400,800,True,1)
         def on_closing():
             if messagebox.askokcancel("Quit", "Do you want to quit?"):
                 self.button[0].changeButtonState(True) 
