@@ -57,9 +57,7 @@ class Oscilogram:
 
 
     def UpdateDataToArray(self,data):
-        #time1=time.time()
         self.updateCombobox()
-        
         try:
             wavedata=data[self.firstindex][self.secondindex]
         except:
@@ -69,7 +67,6 @@ class Oscilogram:
             self.wave.signaliput=(self.buttonsStates[1] and self.buttonsStates[2] and self.buttonsStates[3])
             self.wave.writeDataToArray([self.adjustData(wavedata[0]),wavedata[1]])
             self.wave.printData()
-        #print("timeOciData: "+str(time.time()-time1))
     
     def setSourceList(self,SourceList):
         self.SourceList=SourceList

@@ -61,62 +61,37 @@ class Osciloscope:
         self.Labels[self.numberOfOscilograms-1].grid(row=1+(self.numberOfOscilograms-1)*2)
         self.UpdateDataScrollbar()
 
-###############
+
     def createThreads(self):
         self.threads=[threading.Thread(target=self.writeData, args=(i,)) for i in range(len(self.Osci))]
+
 
     def startThreads(self):
         for i in range(len(self.Osci)):
             self.threads[i].start()
             
 
-
     def writeData(self,i):
-        
-        time1=time.time()
+        #time1=time.time()######################################################
         self.Osci[i].setNumberOfOscilograms(self.numberOfOscilograms)
         self.Osci[i].setSourceList(self.sourceList)
         self.Osci[i].buttonsStates=self.buttonsStates
         self.Osci[i].UpdateDataToArray(self.datain)
-        print("oneOSctime: "+str(time.time()-time1))
+        #print("oneOSctime: "+str(time.time()-time1))######################################################
+
 
     def UpdateData(self,buttonsStates):
         self.buttonsStates=buttonsStates
         self.sourceList=self.createSourceList(self.datain)
         if self.state:
-            time3=time.time()
+            #time3=time.time()######################################################
             self.createThreads()
             self.startThreads()
             for i in range(len(self.Osci)):
                 self.threads[i].join()
-            print("AllOsc: "+str(time.time()-time3))
+            #print("AllOsc: "+str(time.time()-time3))######################################################
     
 
-
-
-
-
-
-
-    def costam(self,i):
-        time1=time.time()
-        #self.createThreads()
-        
-        print("threadCRE: "+str(time.time()-time1))
-        self.sourceList=self.createSourceList(self.datain)
-        #for i in range(len(self.Osci)):
-        time3=time.time()
-        self.Osci[i].setSourceList(self.sourceList)
-        self.Osci[i].buttonsStates=self.buttonsStates
-        self.Osci[i].UpdateDataToArray(self.datain)
-        print("oneOscitime: "+str(time.time()-time3))
-            
-        print("allOsciTime: "+str(time.time()-time1))
-        time.sleep(3)
-
-
-
-##############
 
     
     def createSourceList(self,data):

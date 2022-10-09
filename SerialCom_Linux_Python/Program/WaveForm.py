@@ -54,7 +54,7 @@ class WaveForm:
         #print("arraytime: "+str(time.time()-time1))
 
     def printData(self):
-        time1=time.time()
+        #time1=time.time()########################################
         if(self.fpsCount>self.Fps):
             try:
                 self.canvas.delete("plot")
@@ -66,7 +66,7 @@ class WaveForm:
             self.fpsCount=0
         else:
            self.fpsCount+=1 
-        print("printtime: "+str(time.time()-time1))
+        #print("printtime: "+str(time.time()-time1))######################################
 
     
            
