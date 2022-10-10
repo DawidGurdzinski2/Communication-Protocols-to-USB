@@ -60,8 +60,8 @@ def dataStream():
         
         
 
-#x=threading.Thread(target=dataStream,daemon=True)
-#x.start()
+x=threading.Thread(target=dataStream,daemon=True)
+x.start()
 
 
 def on_closing():
