@@ -2,6 +2,7 @@ import tkinter as tk
 from MainButton import *
 from Osciloscope import *
 from Generator import *
+from Terminal import *
 
 class ButtonFrame:
 
@@ -20,7 +21,7 @@ class ButtonFrame:
         self.Osc=Osciloscope(self.teporaryWindow,0,0 ,False,0)
         self.Gen=Generator(self.teporaryWindow,False)
         #self.Mod=
-        #self.Ter=
+        self.Ter=Terminal(self.teporaryWindow, False)
         self.teporaryWindow.destroy()
 
     def createButtons(self):
@@ -35,9 +36,9 @@ class ButtonFrame:
         self.button[0].changeButtonState(False) 
         self.OSC=tk.Toplevel()
         self.OSC.title("Osciloscope")
-        self.OSC.geometry(str(600)+"x"+str(1200))
-        self.OSC.config(background="white")
-        self.Osc=Osciloscope(self.OSC,400,400,True,1)
+        self.OSC.geometry(str(1150)+"x"+str(875))
+        self.OSC.config(background="grey")
+        self.Osc=Osciloscope(self.OSC,400,800,True,1)
         def on_closing():
             if messagebox.askokcancel("Quit", "Do you want to quit?"):
                 self.button[0].changeButtonState(True) 
@@ -50,7 +51,7 @@ class ButtonFrame:
         self.GEN=tk.Toplevel()
         self.GEN.title("Generator")
         self.GEN.geometry(str(700)+"x"+str(700))
-        self.GEN.config(background="white")
+        self.GEN.config(background="grey")
         self.Gen=Generator(self.GEN,True)
         def on_closing():
             if messagebox.askokcancel("Quit", "Do you want to quit?"):
@@ -72,25 +73,32 @@ class ButtonFrame:
         print("modulator")
     
     
-
     def clickTerminal(self):
-        Terminal=tk.Toplevel()
-        Terminal.title("Terminal")
+        self.button[3].changeButtonState(False) 
+        self.TER=tk.Toplevel()
+        self.TER.title("Terimnal")
+        self.TER.geometry(str(700)+"x"+str(700))
+        self.TER.config(background="grey")
+        self.Ter=Terminal(self.TER,True)
         def on_closing():
             if messagebox.askokcancel("Quit", "Do you want to quit?"):
-                Terminal.destroy()
-        Terminal.protocol("WM_DELETE_WINDOW", on_closing)
-        print("terminal") 
+                self.button[3].changeButtonState(True) 
+                self.Ter.resetData()
+                self.TER.destroy()   
+        self.TER.protocol("WM_DELETE_WINDOW", on_closing)         
+
+        
+    
     
     
     def getData(self):
-        return [self.Gen.dataout,[[0,0],[0,0]],[[0,0],[0,0]]]
+        return [self.Gen.dataout,[[0,0],[0,0]],self.Ter.dataout]
 
     def UpdateData(self):
         self.Osc.UpdateData(self.buttonsStates())
         self.Gen.UpdateData()
         #self.Mod.UpdateData()
-        #self.Ter.UpdateData()
+        self.Ter.UpdateData()
 
     def setData(self,data):
         self.Osc.datain=data

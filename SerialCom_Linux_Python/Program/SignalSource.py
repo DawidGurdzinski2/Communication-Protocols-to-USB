@@ -6,10 +6,12 @@ class SignalSource:
 
 
     def __init__(self,frame,row,column):
-        self.frame=tk.Frame(frame,bg="pink",bd=5)
+        self.frame=tk.Frame(frame,bg="grey",bd=5)
         tk.Grid.rowconfigure(frame,0,weight=1)
         tk.Grid.columnconfigure(frame,0,weight=1)
         self.frame.grid(row=row,column=column,sticky="nswe")
+        self.genNumber=tk.Label(self.frame,text="Output"+str(row/2))
+        self.genNumber.grid(row=0,column=0)
         self.signal=Signal()
         self.createListoOfSignals()
         self.createButtons()
@@ -21,6 +23,7 @@ class SignalSource:
         self.Duty=0
         ###########
         self.createParameterFrame(self.signalType)
+
         
 
     def createListoOfSignals(self):
@@ -49,17 +52,6 @@ class SignalSource:
             self.buttonStart.config(text="Start")
 
    
-    
-    
-
-    
-               
-
-    
-
-   
-
-    
 
     #FUNCIONT WHICH YOU NEED CHANGE TO ADD NEW SIGNAL 
     def sendSignal(self):
@@ -131,32 +123,32 @@ class SignalSource:
     #DESTROYERS AND CREATORS FOR NEW FUNCTION/PARAMETERS
     def createSQRPar(self):
         self.varPeriod =tk.StringVar()
-        self.labelPeriod=tk.Label(self.frame,text="Period: "+str(self.Period))
+        self.labelPeriod=tk.Label(self.frame,text="Period: "+str(self.Period)+" ms")
         self.labelPeriod.grid(row=0,column=2)
         self.textboxPeriod=tk.Entry(self.frame,width=15,textvariable=self.varPeriod )
         self.textboxPeriod.grid(column=2,row=1)
 
         self.varAmplitude =tk.StringVar()
-        self.labelAmplitude=tk.Label(self.frame,text="Amplitude: "+str(self.Amplitude))
+        self.labelAmplitude=tk.Label(self.frame,text="Amplitude: "+str(self.Amplitude)+" V")
         self.labelAmplitude.grid(row=0,column=3)
         self.textboxAmplitude=tk.Entry(self.frame,width=15,textvariable=self.varAmplitude )
         self.textboxAmplitude.grid(column=3,row=1)
 
         self.varDuty =tk.StringVar()
-        self.labelDuty=tk.Label(self.frame,text="Duty: "+str(self.Duty))
+        self.labelDuty=tk.Label(self.frame,text="Duty: "+str(self.Duty)+" %")
         self.labelDuty.grid(row=0,column=4)
         self.textboxDuty=tk.Entry(self.frame,width=15,textvariable=self.varDuty )
         self.textboxDuty.grid(column=4,row=1)
 
     def createCosPar(self):
         self.varPeriod =tk.StringVar()
-        self.labelPeriod=tk.Label(self.frame,text="Period: "+str(self.Period))
+        self.labelPeriod=tk.Label(self.frame,text="Period: "+str(self.Period) +" ms")
         self.labelPeriod.grid(row=0,column=2)
         self.textboxPeriod=tk.Entry(self.frame,width=15,textvariable=self.varPeriod )
         self.textboxPeriod.grid(column=2,row=1)
 
         self.varAmplitude =tk.StringVar()
-        self.labelAmplitude=tk.Label(self.frame,text="Amplitude: "+str(self.Amplitude))
+        self.labelAmplitude=tk.Label(self.frame,text="Amplitude: "+str(self.Amplitude)+" V")
         self.labelAmplitude.grid(row=0,column=3)
         self.textboxAmplitude=tk.Entry(self.frame,width=15,textvariable=self.varAmplitude )
         self.textboxAmplitude.grid(column=3,row=1)

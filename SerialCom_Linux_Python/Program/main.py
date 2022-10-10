@@ -2,7 +2,7 @@
 from tkinter import messagebox
 import tkinter as tk
 from ButtonFrame import *
-from multiprocessing import Process
+
 import threading
 import time 
 
@@ -43,6 +43,14 @@ frame=ButtonFrame(window)
 # Generator=[[y1,x1],[y2,x2],....,[yn,xn]]
 # Modulator=[[y1,x1],[y2,x2],....,[yn,xn]]
 # Terminal=[[y1,x1],[y2,x2],....,[yn,xn]]
+
+    # convert a time expressed in seconds since epoch to a readable string
+#                                        epoch = when your computer thinks time began (reference point)
+
+
+#(y1,x1)(y2,x2)(y3,x3) x punkty w czasie
+#data[x,y]
+# [y1,x1=0][y2,x2-x1][y3,x3-x2]
 def dataStream():
     while True:
         frame.UpdateData()
@@ -62,5 +70,4 @@ def on_closing():
         
 window.protocol("WM_DELETE_WINDOW", on_closing)
 window.mainloop() 
-
 
