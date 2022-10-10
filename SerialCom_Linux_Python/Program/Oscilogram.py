@@ -23,7 +23,7 @@ class Oscilogram:
 
 
         self.scaleYTuple=(0.01,0.05,0.1,0.2,0.5,1,2,5,10,20,50)
-        self.scaleXTuple=(0.0625,0.125,0.25,0.5,1,2,4,8,16)
+        self.scaleXTuple=(0.04,0.0625,0.125,0.25,0.5,1,2,4,8,16)
         
         self.scaleY=self.scaleYTuple.index(1)
         self.scaleX=self.scaleXTuple.index(1)

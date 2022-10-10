@@ -48,11 +48,11 @@ frame=ButtonFrame(window)
 #                                        epoch = when your computer thinks time began (reference point)
 
 
-
-
+#(y1,x1)(y2,x2)(y3,x3) x punkty w czasie
+#data[x,y]
+# [y1,x1=0][y2,x2-x1][y3,x3-x2]
 def dataStream():
     while True:
-        
         frame.UpdateData()
         data=frame.getData()
         frame.setData(data)
@@ -60,8 +60,8 @@ def dataStream():
         
         
 
-x=threading.Thread(target=dataStream,daemon=True)
-x.start()
+#x=threading.Thread(target=dataStream,daemon=True)
+#x.start()
 
 
 def on_closing():
@@ -70,5 +70,4 @@ def on_closing():
         
 window.protocol("WM_DELETE_WINDOW", on_closing)
 window.mainloop() 
-
 

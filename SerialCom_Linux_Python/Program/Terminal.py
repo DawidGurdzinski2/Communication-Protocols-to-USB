@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import ttk
 import serial
 import time
+import threading
 
 class Terminal:
 
@@ -15,8 +16,8 @@ class Terminal:
         #self.createScrollBar()
         self.BandwidthList=(115200,6969,2323)
         self.currentBandwidth=115200
-        self.PortList=("AWWD","PSS")
-        self.currentPort="AWWD"
+        self.PortList=('/dev/ttyACM0','/dev/ttyACM1')
+        self.currentPort='/dev/ttyACM0'
         self.numberOfSignals=1
         #self.createSourceSignal(self.numberOfSignals)
         self.state=False
@@ -77,9 +78,14 @@ class Terminal:
             self.startButton.config(text="START")
         else:
             self.state=True
+            self.dataout=[[0,1],[0,0]]
             self.startButton.config(text="STOP")
+            self.initPort()
+            print("init")
 
     
+    def initPort(self):
+        self.port=serial.Serial(self.currentPort,self.currentBandwidth)
 
 
     def createComboboxOfBandwidth(self):
@@ -88,6 +94,7 @@ class Terminal:
         self.combo['values']=self.BandwidthList
         self.combo.grid(column=2,row=1,columnspan=3)
         self.combo['state']='readonly'
+        self.combo.current(0) 
         self.combo.bind("<<ComboboxSelected>>", self.on_select_changedBd)
 
     def on_select_changedBd(self,event):
@@ -100,6 +107,7 @@ class Terminal:
         self.combo['values']=self.PortList
         self.combo.grid(column=2,row=3,columnspan=3)
         self.combo['state']='readonly'
+        self.combo.current(0) 
         self.combo.bind("<<ComboboxSelected>>", self.on_select_changedPort)
 
     def on_select_changedPort(self,event):
@@ -122,14 +130,30 @@ class Terminal:
 
     def UpdateData(self):
         if self.state:
-            #self.sendSignal()
-            #print("zydzi")
-            i=1
-
-
-    
+            self.state=False
+            self.createThread()
+            self.thread.start()
 
     def resetData(self):
         self.dataout=[[0,0]]
         self.state=False
     
+
+
+    def createThread(self):
+        self.thread=threading.Thread(target=self.writeData, args=(),daemon=True) 
+
+
+    def writeData(self):
+        
+        line=self.port.readline()
+        #############################
+        #self.sendSignal()
+        #print("zydzi")
+        line=line[7:]
+        line=line[:2]
+        line=float(line)
+        print(line)
+        ####################
+        self.dataout=[[-line/90,1],[0,0]]
+        self.state=True
